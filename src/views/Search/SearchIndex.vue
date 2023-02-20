@@ -45,14 +45,18 @@
         <div class="details clearfix">
           <div class="sui-navbar">
             <div class="navbar-inner filter">
-              <ul class="sui-nav"
-                  @click="changeOrder">
-                <li :class="{active:isOne}">
+              <!-- 事件委派 -->
+              <!-- <ul class="sui-nav"
+                  @click="changeOrder"> -->
+              <ul class="sui-nav">
+                <li :class="{active:isOne}"
+                    @click="changeOrder('1')">
                   <a href="#">综合<span class="iconfont"
                           :class="{'icon-long-arrow-up':isAsc,'icon-direction-down':isDesc}"
                           v-show="isOne"></span></a>
                 </li>
-                <li :class="{active:isTwo}">
+                <li :class="{active:isTwo}"
+                    @click="changeOrder('2')">
                   <a href="#">价格<span class="iconfont"
                           :class="{'icon-long-arrow-up':isAsc,'icon-direction-down':isDesc}"
                           v-show="isTwo"></span></a>
@@ -159,7 +163,8 @@ export default {
         "category3Id": undefined,
         "categoryName": undefined,
         "keyword": undefined,
-        "order": "1:asc",
+        // 默认价格降序容易观察效果
+        "order": "2:desc",
         "pageNo": 1,
         "pageSize": 10,
         "props": [],
@@ -220,8 +225,16 @@ export default {
         this.getData()
       }
     },
-    changeOrder (e) {
-      console.log(e.target);
+    changeOrder (flag) {
+      // console.log(e.target);
+      // alert(this.searchParams.order)
+      let oldSort = this.searchParams.order.split(":")[1]
+      if (oldSort == 'desc') {
+        this.order = `${flag}:asc`
+      } else {
+        this.order = `${flag}:desc`
+      }
+      // this.order = `${flag}:`
     },
   },
 
