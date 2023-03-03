@@ -62,7 +62,7 @@ export default {
       keyword: undefined
     }
   },
-  // name: '',
+  name: 'HeaderIndex',
   methods: {
     goSearch () {
       // 这个是编程式导航

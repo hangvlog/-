@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import home from './Home'
 import search from './Search';
+import detail from './Detail';
 // 使用插件
 Vue.use(Vuex)
     // 存储数据
@@ -31,5 +32,6 @@ export default new Vuex.Store({
     modules: {
         home,
         search,
+        detail,
     }
 })

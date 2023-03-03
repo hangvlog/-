@@ -83,8 +83,9 @@
                   :key="goodsList.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html"
-                       target="_blank"><img :src="goodsList.defaultImg" /></a>
+                    <router-link :to="`/detail/${goodsList.id}`">
+                      <img :src="goodsList.defaultImg" />
+                    </router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -226,15 +227,29 @@ export default {
       }
     },
     changeOrder (flag) {
-      // console.log(e.target);
-      // alert(this.searchParams.order)
-      let oldSort = this.searchParams.order.split(":")[1]
-      if (oldSort == 'desc') {
-        this.order = `${flag}:asc`
+      // 自己写的比老师写得差远了，程序的环形复杂度太高
+      // let [oldMode, oldSort] = this.searchParams.order.split(":")
+      // // 这里有一点不太懂，按理说如果之前是价格降序，然后点击综合之后再次点击价格，价格为何还是降序？
+      // // BUG已经检查出来了，需要实现之前的序号是综合那么不需要修改排序
+      // 如果点击的是同一个元素 升降序取反
+      // if (String(flag) == String(oldMode)) {
+      //   this.searchParams.order = `${flag}:${oldSort}`
+      // } else {
+      //   this.searchParams.order = `${flag}:${oldSort == 'desc' ? 'asc' : 'desc'}`
+      // }
+      // 老师写法
+      let [originFlag, originSort] = this.searchParams.order.split(":");
+      let newOrder = '';
+      // 点击同一个
+      if (originFlag == flag) {
+        newOrder = `${originFlag}:${originSort == 'asc' ? 'desc' : 'asc'}`
       } else {
-        this.order = `${flag}:desc`
+        // 更改不同类型的时候默认降序
+        newOrder = `${flag}:desc`
       }
-      // this.order = `${flag}:`
+      this.searchParams.order = newOrder;
+      this.getData();
+      this.order = `${flag}:`
     },
   },
 
