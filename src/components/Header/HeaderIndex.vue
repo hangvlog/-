@@ -6,13 +6,21 @@
         <div class="container">
           <div class="loginList">
             <p>尚品汇欢迎您！</p>
-            <p>
+            <p v-if="!userName">
               <span>请</span>
               <!-- <a href="###">登录</a> -->
               <!-- 声明式导航，必须有to属性 -->
               <router-link to="/login">登录</router-link>
               <router-link to="/register"
                            class="register">免费注册</router-link>
+            </p>
+            <p v-else>
+              <!-- <span></span> -->
+              <!-- <a href="###">登录</a> -->
+              <!-- 声明式导航，必须有to属性 -->
+              <router-link to="/login">{{userName}}</router-link>
+              <a class="register"
+                 @click="logOut">退出登录</a>
             </p>
           </div>
           <div class="typeList">
@@ -75,12 +83,31 @@ export default {
         query: this.$route.query ? this.$route.query : {}
         // query: this.$route.query || undefined
       })
+    },
+    async logOut () {
+      try {
+        await this.$store.dispatch('logOut')
+        this.$router.push('/home')
+      } catch (e) {
+        alert(e.message)
+      }
+    }
+  },
+  computed: {
+    // fakeName(){
+    //   return this.$store.state.user.userInfo
+    // },
+    //BUG无解
+    userName () {
+      // return this.$store.state.user.userInfo.name
+      return this.$store.state.user.userInfo.name ? this.$store.state.user.userInfo.name : undefined
     }
   },
   mounted () {
     this.$bus.$on('removeKeyword', () => {
       this.keyword = undefined
     })
+
   }
 };
 </script>

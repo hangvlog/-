@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <TestIndex></TestIndex> -->
     <HeaderIndex></HeaderIndex>
     <!-- 路由展示的位置 -->
     <router-view></router-view>
@@ -11,10 +12,12 @@
 <script>
 import HeaderIndex from '@/components/Header/HeaderIndex.vue'
 import FooterIndex from '@/components/Footer/FooterIndex.vue'
+// import TestIndex from '@/test/TestIndex.vue'
 export default {
   components: {
     HeaderIndex,
     FooterIndex,
+    // TestIndex,
   },
   mounted () {
     // 通知vuex获取数据

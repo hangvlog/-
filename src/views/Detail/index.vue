@@ -377,6 +377,7 @@ import ImageList from './ImageList/ImageList'
 import Zoom from './Zoom/Zoom'
 import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
+// import { query } from 'express'
 // import { stringify } from 'querystring'
 
 
@@ -419,8 +420,12 @@ export default {
       // 剩下的思路就是如果输入为退格或者delete键,那么this.count剪切一个字符
     },
     async addToShopCart () {
+      // 向服务器发送数据
       try {
         await this.$store.dispatch('addOrUpdateToShopCart', { skuId: this.$route.params.skuId, skuNum: this.count })
+        sessionStorage.setItem('skuInfo', JSON.stringify(this.skuInfo))
+        // 路由跳转
+        this.$router.push({ name: 'AddCartSuccess', query: { skuNum: this.count } })
       } catch (e) {
         alert(e.message)
       }
