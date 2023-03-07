@@ -78,7 +78,7 @@
         <div class="sumprice">
           <em>总价（不含运费） ：</em>
           <!-- <i class="summoney">{{totalPrice }}</i> -->
-          <i class="summoney">{{21 }}</i>
+          <i class="summoney">{{totalPrice }}</i>
         </div>
         <div class="sumbtn">
           <a class="sum-btn"
@@ -97,7 +97,7 @@ export default {
   name: 'ShopCart',
   data () {
     return {
-      cartInfoList: [],
+      // cartInfoList: [],
     }
   },
   methods: {
@@ -143,32 +143,7 @@ export default {
     //     alert(e.message)
     //   }
     // }),
-    computed: {
-      //数据没拿到的原因是computed计算拿到的数据在mounted之前 -> vuex获取的数据也在mounted之前？？？
-      //出现问题数据拿不到，原因式vue组件的生命周期，其先computed后mounted，computed刚好在mounted之前执行
-      ...mapGetters({
-        cartList: 'cartList' || [],
-      }),
-      //两次执行，第一次是挂载前应该为【】
-      //第二次是mounted之后数据更新为最新的
-      cartInfoList () {
-        // console.log('getter被调用了，得到了cartInfoList。此时的cartList是' + this.cartList);
-        return this.cartList.cartInfoList || [];
-      },
-      // ...mapGetters({
-      //   cartInfoList: 'cartInfoList' || []
-      // })
-      totalPrice () {
-        let sum = 0//比我好多了
-        this.cartInfoList.forEach((item) => {
-          sum += item.skuPrice * item.skuNum
-        })
-        return sum
-      },
-      isCheckedAll () {
-        return this.cartInfoList.every((item) => item.isChecked == 1)
-      },
-    },
+
     // mounted () {
     //   this.getData();
     //   // console.log(this.cartInfoList);
@@ -177,7 +152,38 @@ export default {
       this.getData();
       // console.log(this.cartInfoList);
     }
-  }
+  },
+  computed: {
+    //数据没拿到的原因是computed计算拿到的数据在mounted之前 -> vuex获取的数据也在mounted之前？？？
+    //出现问题数据拿不到，原因式vue组件的生命周期，其先computed后mounted，computed刚好在mounted之前执行
+    ...mapGetters({
+      cartList: 'cartList' || [],
+    }),
+    //两次执行，第一次是挂载前应该为【】
+    //第二次是mounted之后数据更新为最新的
+    cartInfoList () {
+      // console.log('getter被调用了，得到了cartInfoList。此时的cartList是' + this.cartList);
+      return this.cartList.cartInfoList || [];
+    },
+    // ...mapGetters({
+    //   cartInfoList: 'cartInfoList' || []
+    // })
+    totalPrice () {
+      let sum = 0//比我好多了
+      this.cartInfoList.forEach((item) => {
+        sum += item.skuPrice * item.skuNum
+      })
+      return sum
+    },
+    isCheckedAll () {
+      return this.cartInfoList.every((item) => item.isChecked == 1)
+    },
+  },
+
+  mounted () {
+    this.getData();
+    // console.log(this.cartInfoList);
+  },
 }
 </script>
 

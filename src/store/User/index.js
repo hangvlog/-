@@ -57,7 +57,7 @@ const actions = {
     if (result.code == 200) {
       commit('CHANGEUSERINFO', result.data)
     } else {
-      return 'error'
+      return Promise.reject(new Error('error getting user info'))
     }
   },
 

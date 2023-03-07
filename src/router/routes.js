@@ -29,6 +29,7 @@ export default [{
     },
 },
 {
+    name: 'login',
     path: '/login',
     component: LoginIndexVue,
     meta: { isShown: false },

@@ -97,10 +97,10 @@ export default {
     // fakeName(){
     //   return this.$store.state.user.userInfo
     // },
-    //BUG无解
+    //BUG无解 2023.3.7成功解决这个假BUG问题 唉，早知道昨晚不纠结这个了，实在有些浪费时间
     userName () {
       // return this.$store.state.user.userInfo.name
-      return this.$store.state.user.userInfo.name ? this.$store.state.user.userInfo.name : undefined
+      return this.$store.state.user.userInfo ? this.$store.state.user.userInfo.name : undefined
     }
   },
   mounted () {
