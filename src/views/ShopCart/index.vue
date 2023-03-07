@@ -147,10 +147,6 @@ export default {
     //   this.getData();
     //   // console.log(this.cartInfoList);
     // },
-    created () {
-      this.getData();
-      // console.log(this.cartInfoList);
-    }
   },
   computed: {
     //数据没拿到的原因是computed计算拿到的数据在mounted之前 -> vuex获取的数据也在mounted之前？？？

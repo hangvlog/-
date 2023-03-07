@@ -7,6 +7,7 @@ import detail from './Detail';
 import shopCar from './ShopCar';
 import user from './User';
 import test from './Test';
+import trade from './Trade';
 // 使用插件
 Vue.use(Vuex)
 // 存储数据
@@ -39,5 +40,6 @@ export default new Vuex.Store({
         shopCar,
         test,
         user,
+        trade,
     }
 })
